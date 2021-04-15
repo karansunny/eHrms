@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@android:color/white"
+    android:layout_height="wrap_content">
+
+    <!--<android.support.v7.widget.CardView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="80dp"-->
+        <!--android:layout_marginLeft="5dp"-->
+        <!--android:layout_marginTop="5dp">-->
+
+        <LinearLayout
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:id="@+id/sblist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:paddingBottom="2dp"
+            android:weightSum="2"
+            android:orientation="vertical"
+            android:background="@drawable/shape_adapter_cell">
+
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_marginTop="6dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1)"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="3dp">
+
+                    <TextView
+                        android:textStyle="bold"
+                        android:layout_width="94dp"
+                        android:layout_height="wrap_content"
+                        android:text="Scheme Id" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:textStyle="bold"
+                        android:text=":"/>
+
+                    <TextView
+                        android:id="@+id/tv_scheme_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dp"
+                        android:text="New Text"
+                        android:textColor="@color/color_black" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="3dp">
+
+                    <TextView
+                        android:textStyle="bold"
+                        android:layout_width="94dp"
+                        android:layout_height="wrap_content"
+                        android:text="Scheme Name" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:textStyle="bold"
+                        android:text=":"/>
+
+                    <TextView
+                        android:id="@+id/tv_scheme_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dp"
+                        android:text="New Text"
+                        android:textColor="@color/color_black" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="3dp">
+
+                    <TextView
+                        android:textStyle="bold"
+                        android:layout_width="94dp"
+                        android:layout_height="wrap_content"
+                        android:text="Scheme Type" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:textStyle="bold"
+                        android:text=":"/>
+
+                    <TextView
+                        android:id="@+id/tv_scheme_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dp"
+                        android:text="New Text"
+                        android:textColor="@color/color_black" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="3dp">
+
+                    <TextView
+                        android:textStyle="bold"
+                        android:layout_width="94dp"
+                        android:layout_height="wrap_content"
+                        android:text="Water Source" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:textStyle="bold"
+                        android:text=":"/>
+
+                    <TextView
+                        android:id="@+id/tv_water_source"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dp"
+                        android:text="New Text"
+                        android:textColor="@color/color_black" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="3dp">
+
+                    <TextView
+                        android:textStyle="bold"
+                        android:layout_width="94dp"
+                        android:layout_height="wrap_content"
+                        android:text="Financial Year" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:textStyle="bold"
+                        android:text=":"/>
+
+                    <TextView
+                        android:id="@+id/tv_fin_yr"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dp"
+                        android:text="New Text"
+                        android:textColor="@color/color_black" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_inspected_by"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="3dp">
+
+                    <TextView
+                        android:textStyle="bold"
+                        android:layout_width="94dp"
+                        android:layout_height="wrap_content"
+                        android:text="Fund Type" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:textStyle="bold"
+                        android:text=":"/>
+
+                    <TextView
+                        android:id="@+id/tv_fund_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dp"
+                        android:text="New Text"
+                        android:textColor="@color/color_black" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="3dp">
+
+                    <TextView
+                        android:textStyle="bold"
+                        android:layout_width="94dp"
+                        android:layout_height="wrap_content"
+                        android:text="NIT No." />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:textStyle="bold"
+                        android:text=":"/>
+
+                    <TextView
+                        android:id="@+id/tv_nit_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dp"
+                        android:text="New Text"
+                        android:textColor="@color/color_black" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_margin="4dp"
+                    android:padding="4dp"
+                    android:background="@color/color_white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            android:text="District"/>
+
+                        <TextView
+                            android:id="@+id/tv_district"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:lines="1"
+                            android:textSize="13sp"
+                            android:textStyle="normal"
+                            android:text="New Text"
+                            android:textColor="#151B54" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            android:text="Block"/>
+
+                        <TextView
+                            android:id="@+id/tv_block"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:lines="1"
+                            android:textSize="13sp"
+                            android:textStyle="normal"
+                            android:text="New Text"
+                            android:textColor="#151B54" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            android:text="Panchayat"/>
+
+                        <TextView
+                            android:id="@+id/tv_panchayat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:lines="1"
+                            android:textSize="13sp"
+                            android:textStyle="normal"
+                            android:text="New Text"
+                            android:textColor="#151B54" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:weightSum="2"
+                android:visibility="visible"
+                android:id="@+id/ll_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_inspect"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_weight="1"
+                    android:textSize="13dp"
+                    android:text="Add Inspection"/>
+
+                <Button
+                    android:layout_marginLeft="4dp"
+                    android:id="@+id/btn_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:textSize="13dp"
+                    android:text="View Inspection"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    <!--</android.support.v7.widget.CardView>-->
+</LinearLayout>
