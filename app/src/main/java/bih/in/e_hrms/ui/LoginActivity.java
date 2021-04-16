@@ -19,6 +19,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
+
 import bih.in.e_hrms.R;
 
 import bih.in.e_hrms.database.DataBaseHelper;
@@ -33,7 +35,7 @@ public class LoginActivity extends Activity {
 
     ConnectivityManager cm;
     public static String UserPhoto;
-    String version;
+    //String version;
     TelephonyManager tm;
     private static String imei;
     //TODO setup Database
@@ -43,7 +45,7 @@ public class LoginActivity extends Activity {
     String pass = "";
     EditText userName;
     EditText userPass;
-    String[] param;
+    //String[] param;
     DataBaseHelper localDBHelper;
 
     UserDetails userInfo;
@@ -54,24 +56,23 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Button loginBtn = (Button) findViewById(R.id.btn_login);
-        TextView signUpBtn = (TextView) findViewById(R.id.tv_signup);
+        Button loginBtn = findViewById(R.id.btn_login);
+        TextView signUpBtn = findViewById(R.id.tv_signup);
+        userName = findViewById(R.id.et_username);
+        userPass = findViewById(R.id.et_password);
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userName = (EditText) findViewById(R.id.et_username);
-                userPass = (EditText) findViewById(R.id.et_password);
-                param = new String[2];
-                param[0] = userName.getText().toString();
-                param[1] = userPass.getText().toString();
 
-                if (param[0].length() < 1){
-                    Toast.makeText(LoginActivity.this, "Enter Valid User Id", Toast.LENGTH_SHORT).show();
-                }else if (param[1].length() < 1){
-                    Toast.makeText(LoginActivity.this, "Enter Valid Password", Toast.LENGTH_SHORT).show();
+                if (isDataValidated()){
+
+                    String username = userName.getText().toString();
+                    String password = userPass.getText().toString();
+
+                    new LoginTask(username, password).execute();
                 }else{
-                    new LoginTask(param[0], param[1]).execute(param);
+                    Toast.makeText(LoginActivity.this,"Please fill all fields", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -85,13 +86,13 @@ public class LoginActivity extends Activity {
 //            }
 //        });
 
-        try {
-            version = getPackageManager().getPackageInfo(getPackageName(),
-                    0).versionName;
-        } catch (PackageManager.NameNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+//        try {
+//            version = getPackageManager().getPackageInfo(getPackageName(),
+//                    0).versionName;
+//        } catch (PackageManager.NameNotFoundException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
     }
 
     private void getUserDetail(){
@@ -106,6 +107,25 @@ public class LoginActivity extends Activity {
         super.onResume();
         //getIMEI();
 
+    }
+
+    public Boolean isDataValidated(){
+        View focusView = null;
+        boolean validate = true;
+
+        if(userName.getText().toString().isEmpty()){
+            userName.setError("Enter Valid UserId");
+            focusView = userName;
+            validate = false;
+        }
+
+        if(userPass.getText().toString().isEmpty()){
+            userPass.setError("Enter Valid Password");
+            focusView = userPass;
+            validate = false;
+        }
+
+        return validate;
     }
 
 
@@ -127,7 +147,7 @@ public class LoginActivity extends Activity {
         protected void onPreExecute() {
 
             this.dialog.setCanceledOnTouchOutside(false);
-            this.dialog.setMessage(getResources().getString(R.string.authenticating));
+            this.dialog.setMessage("Authenticating, Please Wait...");
             this.dialog.show();
         }
 

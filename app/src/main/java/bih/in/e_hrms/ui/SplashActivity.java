@@ -32,6 +32,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import bih.in.e_hrms.database.DataBaseHelper;
+import bih.in.e_hrms.utility.AppConstants;
 import bih.in.e_hrms.web_services.WebServiceHelper;
 import bih.in.e_hrms.entity.Versioninfo;
 import bih.in.e_hrms.utility.CommonPref;
@@ -279,26 +280,26 @@ public class SplashActivity extends Activity {
             final AlertDialog.Builder ab = new AlertDialog.Builder(SplashActivity.this);
             ab.setCancelable(false);
             if (versioninfo != null && versioninfo.isValidDevice()) {
-
+                showDailog(ab, versioninfo);
                 CommonPref.setCheckUpdate(getApplicationContext(), System.currentTimeMillis());
 
-                if (versioninfo.getAdminMsg().trim().length() > 0 && !versioninfo.getAdminMsg().trim().equalsIgnoreCase("anyType{}")) {
-
-                    ab.setTitle(versioninfo.getAdminTitle());
-                    ab.setMessage(Html.fromHtml(versioninfo.getAdminMsg()));
-                    ab.setPositiveButton("ok",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog,
-                                                    int whichButton) {
-                                    dialog.dismiss();
-                                    showDailog(ab, versioninfo);
-                                }
-                            });
-                    ab.show();
-                } else {
-                    showDailog(ab, versioninfo);
-                }
+//                if (versioninfo.getAdminMsg().trim().length() > 0 && !versioninfo.getAdminMsg().trim().equalsIgnoreCase("anyType{}")) {
+//
+//                    ab.setTitle(versioninfo.getAdminTitle());
+//                    ab.setMessage(Html.fromHtml(versioninfo.getAdminMsg()));
+//                    ab.setPositiveButton("ok",
+//                            new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog,
+//                                                    int whichButton) {
+//                                    dialog.dismiss();
+//                                    showDailog(ab, versioninfo);
+//                                }
+//                            });
+//                    ab.show();
+//                } else {
+//                    showDailog(ab, versioninfo);
+//                }
             } else {
                 if (versioninfo != null) {
                     Toast.makeText(getApplicationContext(), "ok" ,Toast.LENGTH_LONG).show();
@@ -529,25 +530,25 @@ public class SplashActivity extends Activity {
 
     private void dothis() {
 
-        if (!Utiilties.isOnline(SplashActivity.this)) {
-
-            AlertDialog.Builder ab = new AlertDialog.Builder(SplashActivity.this);
-            ab.setMessage(Html.fromHtml(
-                    "<font color=#000000>Internet Connection is not avaliable..Please Turn ON Network Connection </font>"));
-            ab.setPositiveButton("Turn On Network Connection", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int whichButton) {
-                    Intent I = new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS);
-                    startActivity(I);
-                }
-            });
-
-            ab.create();
-            ab.show();
-
-        } else {
+//        if (!Utiilties.isOnline(SplashActivity.this)) {
+//
+//            AlertDialog.Builder ab = new AlertDialog.Builder(SplashActivity.this);
+//            ab.setMessage(Html.fromHtml(
+//                    "<font color=#000000>Internet Connection is not avaliable..Please Turn ON Network Connection </font>"));
+//            ab.setPositiveButton("Turn On Network Connection", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int whichButton) {
+//                    Intent I = new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS);
+//                    startActivity(I);
+//                }
+//            });
+//
+//            ab.create();
+//            ab.show();
+//
+//        } else {
             start();
-        }
+       // }
     }
 
     private void start() {
@@ -556,8 +557,11 @@ public class SplashActivity extends Activity {
 
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         Intent i;
-//        if(prefs.getBoolean("username", false) && prefs.getBoolean("password",false))
-//        {
+        if(prefs.getBoolean(AppConstants.USERNAME, false) && prefs.getBoolean(AppConstants.PASSWORD,false))
+        {
+            i = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(i);
+            finish();
 //            String userType = prefs.getString("userType", "");
 //
 //            if (userType.equals("tubewell")){
@@ -573,13 +577,13 @@ public class SplashActivity extends Activity {
 //                startActivity(i);
 //                finish();
 //            }
-//        }
-//        else
-//        {
-            i = new Intent(getApplicationContext(),MainActivity.class);
+        }
+        else
+        {
+            i = new Intent(getApplicationContext(),LoginActivity.class);
             startActivity(i);
             finish();
-       // }
+        }
     }
 
     public  boolean hasPermissions(Context context, String... allPermissionNeeded)

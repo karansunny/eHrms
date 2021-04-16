@@ -26,9 +26,9 @@ import bih.in.e_hrms.entity.ward;
 public class WebServiceHelper {
 
     //public static final String SERVICENAMESPACE = "http://minorirrigation.bihar.gov.in/";
-    public static final String SERVICENAMESPACE = "http://tempuri.org/";
+    public static final String SERVICENAMESPACE = "http://ehrms.webglobalinfotech.com/";
 
-    public static final String SERVICEURL1 = "http://minorirrigation.bihar.gov.in/tubewell/webservice.asmx";
+    public static final String SERVICEURL1 = "http://ehrms.webglobalinfotech.com/HrmsWebService.asmx";
 
 
     public static final String APPVERSION_METHOD = "getAppLatest";
