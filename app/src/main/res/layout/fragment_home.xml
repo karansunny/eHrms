@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.ui.home.HomeFragment">
+
+    <RelativeLayout
+        android:id="@+id/rl_user_info"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/buttonshape_orange">
+
+        <LinearLayout
+            android:id="@+id/ll_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:textColor="@color/colorGreyDark"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/tv_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EEARWALTEST"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:visibility="visible"
+            android:layout_marginTop="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ll_div_zone"
+            android:layout_below="@+id/ll_username"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:id="@+id/ll_division"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Quailification"
+                    android:textColor="@color/colorGreyDark"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/tv_qualification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Div 1"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:id="@+id/ll_zone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="District"
+                    android:textColor="@color/colorGreyDark"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/tv_district"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Zone 1"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ll_dist_role"
+            android:layout_below="@+id/ll_div_zone"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:id="@+id/ll_district"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Designation"
+                    android:textColor="@color/colorGreyDark"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/tv_designation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Arwal"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_weight="1"
+                android:id="@+id/ll_role"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Role"
+                    android:textColor="@color/colorGreyDark"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/tv_role"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="EE"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_dist_role"
+            android:orientation="horizontal"
+            android:clickable="true"
+            android:weightSum="2">
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_marginTop="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/rl_user_info">
+
+        <LinearLayout
+            android:layout_margin="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="5dp"
+                    android:gravity="center"
+                    android:background="#ffff"
+                    android:id="@+id/ll_attandenace">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/attendance_mark" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Mark Attendance"
+                        android:gravity="center"
+                        android:textSize="15sp"
+                        android:layout_marginTop="8dp"
+                        android:textStyle="normal"
+                        android:textColor="@color/colorPrimary"
+                        android:textAppearance="?android:textAppearanceSmall"/>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+            <View
+                android:layout_width="10dp"
+                android:layout_height="match_parent">
+
+            </View>
+
+            <RelativeLayout
+                android:visibility="invisible"
+                android:onClick="onViewInspectedScheme"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:gravity="center"
+                android:background="#fff"
+                android:id="@+id/ll_track_Grievance">
+
+                <RelativeLayout
+                    android:id="@+id/rl_count"
+                    android:layout_marginLeft="4dp"
+                    android:layout_toEndOf="@+id/iv_upload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/circuler_shape_red_small">
+
+                    <TextView
+                        android:id="@+id/tv_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="1"
+                        android:textSize="12sp"
+                        android:textColor="@android:color/white"
+                        android:textStyle="normal" />
+                </RelativeLayout>
+
+                <ImageView
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/iv_upload"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/ic_cloud_upload"/>
+                <TextView
+                    android:layout_below="@+id/iv_upload"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Edit / Upload Scheme"
+                    android:gravity="center"
+                    android:layout_marginTop="6dp"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="#000"
+                    android:textAppearance="?android:textAppearanceSmall"/>
+
+
+            </RelativeLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>

@@ -559,7 +559,8 @@ public class SplashActivity extends Activity {
         Intent i;
         if(prefs.getBoolean(AppConstants.USERNAME, false) && prefs.getBoolean(AppConstants.PASSWORD,false))
         {
-            i = new Intent(getApplicationContext(), MainActivity.class);
+            i = new Intent(getApplicationContext(), HomeActivity.class);
+            //i = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(i);
             finish();
 //            String userType = prefs.getString("userType", "");

@@ -24,23 +24,29 @@ public class CommonPref {
 
         String key = "_USER_DETAILS";
 
-        SharedPreferences prefs = context.getSharedPreferences(key,
-                Context.MODE_PRIVATE);
+        SharedPreferences prefs = context.getSharedPreferences(key, Context.MODE_PRIVATE);
 
         SharedPreferences.Editor editor = prefs.edit();
 
-        editor.putString("UserId", userInfo.getUserID());
-        editor.putString("UserName", userInfo.getName());
-        editor.putString("UserPassword", userInfo.getPassword());
-        editor.putString("Role", userInfo.getUserrole());
+        editor.putString("_FName", userInfo.get_FName());
+        editor.putString("EmpId", userInfo.getEmpId());
+        editor.putString("EmpCode", userInfo.getEmpCode());
+        editor.putString("Name", userInfo.getName());
 
-        editor.putString("DistCode", userInfo.getDistrictCode());
+        editor.putString("FName", userInfo.getFName());
+        editor.putString("ActJoinDate", userInfo.getActJoinDate());
+        editor.putString("ActReleaveDate", userInfo.getActReleaveDate());
+        editor.putString("Address", userInfo.getAddress());
+        editor.putString("HQualification", userInfo.getHQualification());
+        editor.putString("ContactNo", userInfo.getContactNo());
+
+        editor.putString("EmailId", userInfo.getEmailId());
+        editor.putString("IsActive", userInfo.getIsActive());
+        editor.putString("Designation", userInfo.getDesignation());
         editor.putString("DistName", userInfo.getDistName());
-        editor.putString("BlockCode", userInfo.getBlockCode());
-        editor.putString("BlockName", userInfo.getBlockName());
-        editor.putString("Degignation", userInfo.getDegignation());
-        editor.putString("MobileNo", userInfo.getMobileNo());
-
+        editor.putString("UserID", userInfo.getUserID());
+        editor.putString("UserName", userInfo.getUserName());
+        editor.putString("Userrole", userInfo.getUserrole());
 
         editor.commit();
 
@@ -50,20 +56,27 @@ public class CommonPref {
 
         String key = "_USER_DETAILS";
         UserDetails userInfo = new UserDetails();
-        SharedPreferences prefs = context.getSharedPreferences(key,
-                Context.MODE_PRIVATE);
+        SharedPreferences prefs = context.getSharedPreferences(key, Context.MODE_PRIVATE);
 
-        userInfo.setUserID(prefs.getString("UserId", ""));
-        userInfo.setName(prefs.getString("UserName", ""));
-        userInfo.setPassword(prefs.getString("UserPassword", ""));
-        userInfo.setUserrole(prefs.getString("Role", ""));
+        userInfo.set_FName(prefs.getString("_FName", ""));
+        userInfo.setEmpId(prefs.getString("EmpId", ""));
+        userInfo.setEmpCode(prefs.getString("EmpCode", ""));
+        userInfo.setName(prefs.getString("Name", ""));
 
+        userInfo.setFName(prefs.getString("FName", ""));
+        userInfo.setActJoinDate(prefs.getString("ActJoinDate", ""));
+        userInfo.setActReleaveDate(prefs.getString("ActReleaveDate", ""));
+        userInfo.setAddress(prefs.getString("Address", ""));
+        userInfo.setHQualification(prefs.getString("HQualification", ""));
+        userInfo.setContactNo(prefs.getString("ContactNo", ""));
+
+        userInfo.setEmailId(prefs.getString("EmailId", ""));
+        userInfo.setIsActive(prefs.getString("IsActive", ""));
+        userInfo.setDesignation(prefs.getString("Designation", ""));
         userInfo.setDistName(prefs.getString("DistName", ""));
-        userInfo.setDistrictCode(prefs.getString("DistCode", ""));
-        userInfo.setBlockCode(prefs.getString("BlockCode", ""));
-        userInfo.setBlockName(prefs.getString("BlockName", ""));
-        userInfo.setDegignation(prefs.getString("Degignation", ""));
-        userInfo.setMobileNo(prefs.getString("MobileNo", ""));
+        userInfo.setUserID(prefs.getString("UserID", ""));
+        userInfo.setUserName(prefs.getString("UserName", ""));
+        userInfo.setUserrole(prefs.getString("Userrole", ""));
 
         return userInfo;
     }

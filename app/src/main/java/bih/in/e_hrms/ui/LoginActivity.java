@@ -24,6 +24,7 @@ import java.text.ParseException;
 import bih.in.e_hrms.R;
 
 import bih.in.e_hrms.database.DataBaseHelper;
+import bih.in.e_hrms.utility.AppConstants;
 import bih.in.e_hrms.web_services.WebServiceHelper;
 import bih.in.e_hrms.entity.UserDetails;
 import bih.in.e_hrms.utility.CommonPref;
@@ -66,11 +67,17 @@ public class LoginActivity extends Activity {
             public void onClick(View v) {
 
                 if (isDataValidated()){
-
+                    Utiilties.hideKeyboard(LoginActivity.this);
                     String username = userName.getText().toString();
                     String password = userPass.getText().toString();
 
-                    new LoginTask(username, password).execute();
+                    if(Utiilties.isOnline(LoginActivity.this)){
+                        new LoginTask(username, password).execute();
+                    }else{
+                        Utiilties.showAlet(LoginActivity.this);
+                    }
+
+
                 }else{
                     Toast.makeText(LoginActivity.this,"Please fill all fields", Toast.LENGTH_SHORT).show();
                 }
@@ -159,7 +166,7 @@ public class LoginActivity extends Activity {
                 userDetails.setAuthenticated(true);
                 return userDetails;
             } else {
-                return WebServiceHelper.Login(username, password,"");
+                return WebServiceHelper.Login(username, password);
             }
 
         }
@@ -169,138 +176,37 @@ public class LoginActivity extends Activity {
 
             if (this.dialog.isShowing()) this.dialog.dismiss();
 
-            if (result != null && result.isAuthenticated() == false) {
-
-                alertDialog.setTitle(getResources().getString(R.string.failed));
-                alertDialog.setMessage(getResources().getString(R.string.authentication_failed));
+            if (result == null){
+                alertDialog.setTitle("Connection Error!!");
+                alertDialog.setMessage("Failed to connect with server. Try again");
+                alertDialog.show();
+            }else if (result.isAuthenticated()) {
+                setLoginStatus(result);
+                start();
+            } else {
+                alertDialog.setTitle("Authentication Failed!!");
+                alertDialog.setMessage("Please enter valid username and password");
                 alertDialog.show();
 
-            } else if (!(result != null)) {
-                AlertDialog.Builder ab = new AlertDialog.Builder(context);
-                ab.setTitle(getResources().getString(R.string.server_down_title));
-                ab.setMessage(getResources().getString(R.string.server_down_text));
-                ab.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int whichButton) {
-
-                        dialog.dismiss();
-
-                    }
-                });
-
-
-                ab.create().getWindow().getAttributes().windowAnimations = android.R.style.Animation_Dialog;
-                ab.show();
-
-            } else {
-
-                //-----------------------------------------Online-------------------------------------
-                if (Utiilties.isOnline(LoginActivity.this)) {
-
-
-                    uid = param[0];
-                    pass = param[1];
-
-                    if (result != null && result.isAuthenticated() == true) {
-                        uid=result.getUserID();
-                        pass = param[1];
-
-                        try {
-
-                            GlobalVariables.LoggedUser = result;
-                            GlobalVariables.LoggedUser.setUserID(userName
-                                    .getText().toString().trim().toLowerCase());
-
-                            GlobalVariables.LoggedUser.setPassword(userPass
-                                    .getText().toString().trim());
-
-
-                            CommonPref.setUserDetails(getApplicationContext(),
-                                    GlobalVariables.LoggedUser);
-
-
-                            long c = setLoginStatus(GlobalVariables.LoggedUser);
-
-                            if (c > 0) {
-                                start();
-                            }
-                            else {
-                                Toast.makeText(LoginActivity.this, getResources().getString(R.string.authentication_failed),
-                                        Toast.LENGTH_SHORT).show();
-                            }
-
-
-                        }
-                        catch (Exception ex) {
-                            ex.printStackTrace();
-                            Toast.makeText(LoginActivity.this, getResources().getString(R.string.authentication_failed),
-                                    Toast.LENGTH_SHORT).show();
-                        }
-
-                    }
-
-                    // offline -------------------------------------------------------------------------
-
-                } else {
-
-                    if (localDBHelper.getUserCount() > 0) {
-
-                        //GlobalVariables.LoggedUser = localDBHelper.getUserDetails(userName.getText().toString().trim().toLowerCase(),userPass.getText().toString());
-
-                        if (GlobalVariables.LoggedUser != null) {
-
-                            CommonPref.setUserDetails(
-                                    getApplicationContext(),
-                                    GlobalVariables.LoggedUser);
-
-                            SharedPreferences.Editor editor = SplashActivity.prefs.edit();
-                            editor.putBoolean("username", true);
-                            editor.putBoolean("password", true);
-                            editor.putString("uid", uid);
-                            editor.putString("pass", pass);
-                            editor.commit();
-                            start();
-
-                        } else {
-
-                            Toast.makeText(
-                                    getApplicationContext(),
-                                    getResources().getString(R.string.username_password_notmatched),
-                                    Toast.LENGTH_LONG).show();
-                        }
-                    } else {
-                        Toast.makeText(
-                                getApplicationContext(),
-                                getResources().getString(R.string.enable_internet_for_firsttime),
-                                Toast.LENGTH_LONG).show();
-                    }
-                }
             }
-
         }
     }
 
-    private long setLoginStatus(UserDetails details) {
-        details.setPassword(pass);
+    private void setLoginStatus(UserDetails details) {
+
         SharedPreferences.Editor editor = SplashActivity.prefs.edit();
-        editor.putBoolean("username", true);
-        editor.putBoolean("password", true);
+        editor.putBoolean(AppConstants.USERNAME, true);
+        editor.putBoolean(AppConstants.PASSWORD, true);
         editor.putString("uid", uid.toLowerCase());
         editor.putString("pass", pass);
-        editor.putString("role", details.getUserrole());
         editor.commit();
-        //PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("USER_ID", uid).commit();
-        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("uid", uid).commit();
-        localDBHelper = new DataBaseHelper(getApplicationContext());
-        //long c = localDBHelper.insertUserDetails(details);
 
-        return 0;
+        CommonPref.setUserDetails(this, details);
     }
 
     public void start() {
-        //getUserDetail();
-        //new SyncPanchayatData().execute("");
-        Intent iUserHome = new Intent(getApplicationContext(), MainActivity.class);
+       // Intent iUserHome = new Intent(getApplicationContext(), MainActivity.class);
+        Intent iUserHome = new Intent(getApplicationContext(), HomeActivity.class);
         startActivity(iUserHome);
         finish();
     }
