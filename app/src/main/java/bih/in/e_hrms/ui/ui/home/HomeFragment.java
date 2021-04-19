@@ -8,16 +8,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import bih.in.e_hrms.R;
 import bih.in.e_hrms.entity.UserDetails;
-import bih.in.e_hrms.ui.ui.gallery.GalleryFragment;
+import bih.in.e_hrms.ui.ui.attendance.AttendanceFragment;
 import bih.in.e_hrms.utility.CommonPref;
-import bih.in.e_hrms.utility.Utiilties;
 
 
 public class HomeFragment extends Fragment {
@@ -44,7 +40,7 @@ public class HomeFragment extends Fragment {
         ll_attandenace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                GalleryFragment nextFrag= new GalleryFragment();
+                AttendanceFragment nextFrag= new AttendanceFragment();
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(root.getId(), nextFrag, "nav_gallery")
                         .addToBackStack(null)
