@@ -12,6 +12,7 @@ import org.ksoap2.transport.HttpTransportSE;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
+import bih.in.e_hrms.entity.AttendacneStatus;
 import bih.in.e_hrms.entity.District;
 import bih.in.e_hrms.entity.PanchayatEntity;
 import bih.in.e_hrms.entity.SignUp;
@@ -33,33 +34,7 @@ public class WebServiceHelper {
 
     public static final String APPVERSION_METHOD = "getAppLatest";
     public static final String AUTHENTICATE_METHOD = "Authenticate";
-
-
-
-    private static final String FIELD_METHOD = "getFieldInformation";
-    private static final String SPINNER_METHOD = "getSpinnerInformation";
-    //private static final String UPLOAD_METHOD = "InsertData";
-    private static final String REGISTER_USER = "RegisterUser";
-
-    private static final String BLOCK_METHOD = "getBlock";
-
-    private static final String GETINITIALPLANTATIONDATA = "getInitialDetailRDDPlantation";
-    private static final String PONDLAKEENCRCHMNTDATA = "getInitialDetailsPondLakeDataCoVerified";
-    private static final String WELLNCRCHMNTDATA = "getInitialDetailsWellDataCoVerified";
-    private static final String GETPLANTATIONINSPECTIONDETAIL = "getPlantationInspdetails";
-    private static final String WELLINSPECTIONLIST = "getWellInspectionList";
-    private static final String UPLOADPLANTATIONINSPECTIONDETAIL = "PlantationInspDetails";
-    private static final String UPLOADSCHEMEINSPECTIONDETAIL = "Inspection_Insert";
-    private static final String GETVILLAGELIST = "getVillageList";
-    private static final String GETPLANATATIONSITELIST = "getPlantationSite";
-    private static final String GETSANRACHNATYPELIST = "getTypesOfSanrchnaList";
-    private static final String GETWARDLIST = "getWardList";
-    private static final String GETPANCHAYATLIST = "getPanchayatList";
-    private static final String GETDISTRICTLIST = "Districts_Select";
-    private static final String GETSURFACESCHEMELIST = "Surface_Search";
-    private static final String GETOPTOINFILTERLIST = "Options_Filter";
-    private static final String GETSURFACESCHEMEINSPECTIONLIST = "Inspection_Search";
-    private static final String GETSURFACESCHEMEINSPECTIONDETAIL = "Inspection_Search_On_Inspection_ID";
+    public static final String ATTENDANCE_STATUS_METHOD = "AttendanceStatus";
 
     static String rest;
 
@@ -79,40 +54,6 @@ public class WebServiceHelper {
         }
         return versioninfo;
 
-    }
-
-
-    public static String completeSignup(SignUp data, String imei, String version) {
-        SoapObject request = new SoapObject(SERVICENAMESPACE, REGISTER_USER);
-        request.addProperty("Name",data.getName());
-        request.addProperty("DistrictCode",data.getDist_code());
-        request.addProperty("BlockCode",data.getBlock_code());
-        request.addProperty("MobileNo",data.getMobile());
-        request.addProperty("Degignation",data.getDesignation());
-        //request.addProperty("CreatedBy",data.getUpload_by());
-        request.addProperty("IMEI",imei);
-        request.addProperty("Appversion",version);
-        request.addProperty("Pwd","abc");
-        try {
-            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
-                    SoapEnvelope.VER11);
-            envelope.dotNet = true;
-            envelope.implicitTypes = true;
-            envelope.setOutputSoapObject(request);
-
-            HttpTransportSE androidHttpTransport = new HttpTransportSE(
-                    SERVICEURL1);
-            androidHttpTransport.call(SERVICENAMESPACE + REGISTER_USER,
-                    envelope);
-            // res2 = (SoapObject) envelope.getResponse();
-            rest = envelope.getResponse().toString();
-
-            // rest=res2.toString();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "0";
-        }
-        return rest;
     }
 
     public static String resizeBase64Image(String base64image){
@@ -151,6 +92,21 @@ public class WebServiceHelper {
         }
     }
 
+    public static AttendacneStatus getAttendanceStatus(String User_ID) {
+        try {
+            SoapObject res1;
+            res1=getServerData(ATTENDANCE_STATUS_METHOD, UserDetails.getUserClass(),"EmpId",User_ID);
+            if (res1 != null) {
+                return new AttendacneStatus(res1);
+            } else
+                return null;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 //    public static ArrayList<FilterOptionEntity> getFilterOptionData(String optiontype) {
 //
 //        SoapObject res1;
@@ -175,189 +131,30 @@ public class WebServiceHelper {
 //        return fieldList;
 //    }
 
-    public static ArrayList<SurfaceSchemeEntity> getSurfaceSchemeData(String usertype, String userId, String userpassword, String schemeId, String schemeType, String schemeName, String finanYr, String fundType) {
 
-        SoapObject res1;
-        res1=getServerData(GETSURFACESCHEMELIST, SurfaceSchemeEntity.SurfaceSchemeEntity_CLASS, "user_type", "user_ID","Password", "SCHEME_ID", "TYPE_OF_SCHEME","SCHEME_NAME", "FINANCIAL_YEAR", "Fund_Type", usertype,userId,userpassword,schemeId,schemeType,schemeName,finanYr,fundType);
-        int TotalProperty=0;
-        if(res1!=null) TotalProperty= res1.getPropertyCount();
-
-        ArrayList<SurfaceSchemeEntity> fieldList = new ArrayList<SurfaceSchemeEntity>();
-
-        for (int i = 0; i < TotalProperty; i++) {
-            if (res1.getProperty(i) != null) {
-                Object property = res1.getProperty(i);
-                if (property instanceof SoapObject) {
-                    SoapObject final_object = (SoapObject) property;
-                    SurfaceSchemeEntity plantationData= new SurfaceSchemeEntity(final_object);
-                    fieldList.add(plantationData);
-                }
-            } else
-                return fieldList;
-        }
-
-        return fieldList;
-    }
-
-    public static SurfaceInspectionEntity getSurfaceSchemeInspectionData(String usertype, String userId, String userpassword, String Inspection_ID){
-
-        try {
-            SoapObject res1;
-            res1=getServerData(GETSURFACESCHEMEINSPECTIONDETAIL, SurfaceInspectionEntity.SurfaceInspectionEntity_CLASS, "user_type", "user_ID","Password", "Inspection_ID", usertype,userId,userpassword,Inspection_ID);
-
-            if(res1!=null){
-                return new SurfaceInspectionEntity(res1);
-            }else{
-                return null;
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public static ArrayList<SurfaceInspectionDetailEntity> getSurfaceSchemeInspectionData(String usertype, String userId, String userpassword, String schemeId, String schemeName, String finanYr, String designation, String obsrvCat) {
-
-        SoapObject res1;
-        res1=getServerData(GETSURFACESCHEMEINSPECTIONLIST, SurfaceSchemeEntity.SurfaceSchemeEntity_CLASS, "user_type", "user_ID","Password", "SCHEME_ID", "SCHEME_NAME", "FINANCIAL_YEAR", "DESIGNATION", "Observetion_Category", usertype,userId,userpassword,schemeId,schemeName,finanYr,designation,obsrvCat);
-        int TotalProperty=0;
-        if(res1!=null) TotalProperty= res1.getPropertyCount();
-
-        ArrayList<SurfaceInspectionDetailEntity> fieldList = new ArrayList<SurfaceInspectionDetailEntity>();
-
-        for (int i = 0; i < TotalProperty; i++) {
-            if (res1.getProperty(i) != null) {
-                Object property = res1.getProperty(i);
-                if (property instanceof SoapObject) {
-                    SoapObject final_object = (SoapObject) property;
-                    SurfaceInspectionDetailEntity plantationData= new SurfaceInspectionDetailEntity(final_object);
-                    fieldList.add(plantationData);
-                }
-            } else
-                return fieldList;
-        }
-
-        return fieldList;
-    }
-
-    public static ArrayList<ward> getWardListData(String BlockCode) {
-
-
-        SoapObject res1;
-        res1 = getServerData(GETWARDLIST, ward.ward_CLASS, "BlockCode", BlockCode);
-        int TotalProperty = 0;
-        if (res1 != null) TotalProperty = res1.getPropertyCount();
-
-        ArrayList<ward> fieldList = new ArrayList<ward>();
-
-        for (int i = 0; i < TotalProperty; i++) {
-            if (res1.getProperty(i) != null) {
-                Object property = res1.getProperty(i);
-                if (property instanceof SoapObject) {
-                    SoapObject final_object = (SoapObject) property;
-                    ward wardInfo = new ward(final_object);
-                    fieldList.add(wardInfo);
-                }
-            } else
-                return fieldList;
-        }
-
-        return fieldList;
-    }
-
-    public static ArrayList<VillageListEntity> getVillageListData(String BlockCode) {
-
-        SoapObject res1;
-        res1=getServerData(GETVILLAGELIST, VillageListEntity.VillageList_CLASS,"blockCode",BlockCode);
-        int TotalProperty=0;
-        if(res1!=null) TotalProperty= res1.getPropertyCount();
-
-        ArrayList<VillageListEntity> fieldList = new ArrayList<VillageListEntity>();
-
-        for (int i = 0; i < TotalProperty; i++) {
-            if (res1.getProperty(i) != null) {
-                Object property = res1.getProperty(i);
-                if (property instanceof SoapObject) {
-                    SoapObject final_object = (SoapObject) property;
-                    VillageListEntity villageData= new VillageListEntity(final_object);
-                    fieldList.add(villageData);
-                }
-            } else
-                return fieldList;
-        }
-
-        return fieldList;
-    }
-
-    public static ArrayList<PanchayatEntity> getPanchayatList(String DistCode, String BlockCode) {
-
-        SoapObject res1;
-        res1=getServerData(GETPANCHAYATLIST, PanchayatEntity.PanchayatEntity_CLASS,"DistCode", "BlockCode", DistCode, BlockCode);
-        int TotalProperty=0;
-        if(res1!=null) TotalProperty= res1.getPropertyCount();
-
-        ArrayList<PanchayatEntity> fieldList = new ArrayList<PanchayatEntity>();
-
-        for (int i = 0; i < TotalProperty; i++) {
-            if (res1.getProperty(i) != null) {
-                Object property = res1.getProperty(i);
-                if (property instanceof SoapObject) {
-                    SoapObject final_object = (SoapObject) property;
-                    PanchayatEntity villageData= new PanchayatEntity(final_object);
-                    fieldList.add(villageData);
-                }
-            } else
-                return fieldList;
-        }
-
-        return fieldList;
-    }
-
-    public static ArrayList<District> getDistrictList() {
-
-
-
-        SoapObject request = new SoapObject(SERVICENAMESPACE,GETDISTRICTLIST);
-
-        //request.addProperty("BlockCode", dist_Code);
-
-        SoapObject res1;
-        try {
-
-            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
-                    SoapEnvelope.VER11);
-            envelope.dotNet = true;
-            envelope.setOutputSoapObject(request);
-
-            envelope.addMapping(SERVICENAMESPACE,District.DISTRICT_CLASS.getSimpleName(), District.DISTRICT_CLASS);
-            HttpTransportSE androidHttpTransport = new HttpTransportSE(SERVICEURL1);
-            androidHttpTransport.call(SERVICENAMESPACE + GETDISTRICTLIST,
-                    envelope);
-
-            res1 = (SoapObject) envelope.getResponse();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-        int TotalProperty = res1.getPropertyCount();
-
-        ArrayList<District> pvmArrayList = new ArrayList<District>();
-
-        for (int ii = 0; ii < TotalProperty; ii++) {
-            if (res1.getProperty(ii) != null) {
-                Object property = res1.getProperty(ii);
-                if (property instanceof SoapObject) {
-                    SoapObject final_object = (SoapObject) property;
-                    District panchayat = new District(final_object);
-                    pvmArrayList.add(panchayat);
-                }
-            } else
-                return pvmArrayList;
-        }
-
-        return pvmArrayList;
-    }
+//    public static ArrayList<SurfaceInspectionDetailEntity> getSurfaceSchemeInspectionData(String usertype, String userId, String userpassword, String schemeId, String schemeName, String finanYr, String designation, String obsrvCat) {
+//
+//        SoapObject res1;
+//        res1=getServerData(GETSURFACESCHEMEINSPECTIONLIST, SurfaceSchemeEntity.SurfaceSchemeEntity_CLASS, "user_type", "user_ID","Password", "SCHEME_ID", "SCHEME_NAME", "FINANCIAL_YEAR", "DESIGNATION", "Observetion_Category", usertype,userId,userpassword,schemeId,schemeName,finanYr,designation,obsrvCat);
+//        int TotalProperty=0;
+//        if(res1!=null) TotalProperty= res1.getPropertyCount();
+//
+//        ArrayList<SurfaceInspectionDetailEntity> fieldList = new ArrayList<SurfaceInspectionDetailEntity>();
+//
+//        for (int i = 0; i < TotalProperty; i++) {
+//            if (res1.getProperty(i) != null) {
+//                Object property = res1.getProperty(i);
+//                if (property instanceof SoapObject) {
+//                    SoapObject final_object = (SoapObject) property;
+//                    SurfaceInspectionDetailEntity plantationData= new SurfaceInspectionDetailEntity(final_object);
+//                    fieldList.add(plantationData);
+//                }
+//            } else
+//                return fieldList;
+//        }
+//
+//        return fieldList;
+//    }
 
 //    public static ArrayList<District> getDistrictList() {
 //

@@ -130,7 +130,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 displaySelectedFragment(homeFrag);
                 break;
             case R.id.nav_attendance:
-                toolbar.setTitle("Attandance");
+                toolbar.setTitle("Attendance");
                 displaySelectedFragment(new AttendanceFragment());
                 break;
             case R.id.nav_logout:
