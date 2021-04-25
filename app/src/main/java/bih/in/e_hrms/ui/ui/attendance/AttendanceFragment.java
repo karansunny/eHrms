@@ -152,7 +152,7 @@ public class AttendanceFragment extends Fragment {
 
     public void getUserDetail(){
         userInfo = CommonPref.getUserDetails(getActivity());
-        tv_username.setText(userInfo.get_FName());
+        tv_username.setText(userInfo.getName());
 
         tv_date.setText(Utiilties.getDateStringInFormat("dd, MMMM yyyy"));
         tv_day.setText(Utiilties.getDateStringInFormat("EEEE"));

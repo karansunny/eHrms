@@ -27,7 +27,7 @@
             android:layout_height="200dp"
             android:layout_centerHorizontal="true"
             android:background="@drawable/circular_shape_white"
-            android:src="@drawable/hrms_icon"
+            android:src="@drawable/logo2"
             />
 
         <TextView

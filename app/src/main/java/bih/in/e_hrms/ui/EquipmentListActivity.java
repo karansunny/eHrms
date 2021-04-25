@@ -80,11 +80,17 @@ public class EquipmentListActivity extends AppCompatActivity implements Equipmen
     }
 
     @Override
-    public void onItemChecked(Boolean flag, int position) {
+    public void onItemChecked(Boolean flag, final int position) {
         EquipmentEntity info = equipments.get(position);
         info.setSelected(flag);
         equipments.set(position, info);
-        rv_data.getAdapter().notifyItemChanged(position);
+        //rv_data.getAdapter().notifyItemChanged(position);
+        rv_data.post(new Runnable() {
+            @Override
+            public void run() {
+                rv_data.getAdapter().notifyDataSetChanged();
+            }
+        });
     }
 
     private ArrayList<EquipmentEntity> getMarkedEquiments(ArrayList<EquipmentEntity> list){

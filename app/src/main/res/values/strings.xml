@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">Power Construction</string>
+    <string name="app_name">MKB Power Construction</string>
     <string name="action_settings">Settings</string>
-    <string name="appTitle">Power Construction</string>
-    <string name="appSubTitle">Power Construction</string>
+    <string name="appTitle">MKB Power Construction</string>
+    <string name="appSubTitle">MKB Power Construction</string>
     <string name="villageTitle">ग्राम</string>
     <string name="wardTitle">वार्ड</string>
     <string name="fieldRequired">यह जानकारी अनिवार्य है</string>

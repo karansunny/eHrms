@@ -79,7 +79,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     public void setUserData(){
         UserDetails info = CommonPref.getUserDetails(this);
-        tv_username.setText(info.get_FName());
+        tv_username.setText(info.getName());
         tv_number.setText(info.getContactNo());
     }
 

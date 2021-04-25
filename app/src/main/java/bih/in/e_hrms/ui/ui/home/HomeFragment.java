@@ -70,7 +70,7 @@ public class HomeFragment extends Fragment {
     public void setUserDetail(){
         userInfo = CommonPref.getUserDetails(getActivity());
 
-        tv_username.setText(userInfo.get_FName());
+        tv_username.setText(userInfo.getName());
         tv_qualification.setText(userInfo.getHQualification());
         tv_district.setText(userInfo.getDistName());
         tv_designation.setText(userInfo.getDesignation());

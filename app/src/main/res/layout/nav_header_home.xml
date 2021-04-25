@@ -18,7 +18,8 @@
         android:layout_height="80dp"
         android:contentDescription="@string/nav_header_desc"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:src="@drawable/hrms_icon"/>
+        android:scaleType="fitXY"
+        android:src="@drawable/logo2"/>
 
     <TextView
         android:id="@+id/tv_username"
