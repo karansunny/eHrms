@@ -11,6 +11,8 @@ public class AttendacneStatus implements Serializable {
     private String IsIn = "";
     private String IsOut = "";
     private String UserID = "";
+    private String SiteId = "";
+    private String SiteName = "";
 
     public AttendacneStatus() {
     }
@@ -22,6 +24,8 @@ public class AttendacneStatus implements Serializable {
         this.IsIn = obj.getProperty("IsIn").toString();
         this.IsOut = obj.getProperty("IsOut").toString();
         this.UserID = obj.getProperty("UserID").toString();
+        this.SiteId = obj.getProperty("SiteId").toString();
+        this.SiteName = obj.getProperty("SiteName").toString();
     }
 
     public String getEmpId() {
@@ -54,6 +58,22 @@ public class AttendacneStatus implements Serializable {
 
     public void setUserID(String userID) {
         UserID = userID;
+    }
+
+    public String getSiteId() {
+        return SiteId;
+    }
+
+    public void setSiteId(String siteId) {
+        SiteId = siteId;
+    }
+
+    public String getSiteName() {
+        return SiteName;
+    }
+
+    public void setSiteName(String siteName) {
+        SiteName = siteName;
     }
 }
 

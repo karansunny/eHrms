@@ -82,6 +82,15 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if(userInfo != null && Utiilties.isOnline(getActivity())){
+            new AttendanceStatusTask(userInfo.getEmpId()).execute();
+        }
+    }
+
     private class AttendanceStatusTask extends AsyncTask<String, Void, AttendacneStatus> {
         String empId;
 
@@ -117,9 +126,18 @@ public class HomeFragment extends Fragment {
                 alertDialog.setMessage("Failed to connect with server. Try again");
                 alertDialog.show();
             }else {
+
+                if(result.getEmpId().equals("anyType{}")){
+                    tv_attendance_status.setText("Today attendance is not marked yet.");
+                    tv_attendance_status.setTextColor(getResources().getColor(R.color.color_red));
+                }else if (result.getIsOut().equals("anyType{}") && result.getIsIn().equals("Y")){
+                    tv_attendance_status.setText("Today attendance check-in marked");
+                    tv_attendance_status.setTextColor(getResources().getColor(R.color.color_green));
+                }else  if (result.getIsOut().equals("Y") && result.getIsIn().equals("Y")){
+                    tv_attendance_status.setText("Today attendance check-out marked");
+                    tv_attendance_status.setTextColor(getResources().getColor(R.color.color_green));
+                }
                 cv_attendance.setVisibility(View.VISIBLE);
-//                setLoginStatus(result);
-//                start();
             }
         }
     }

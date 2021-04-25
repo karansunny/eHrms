@@ -1,5 +1,6 @@
 package bih.in.e_hrms.utility;
 
+import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -21,6 +22,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
 import android.util.Base64;
 import android.view.View;
 import android.view.Window;
@@ -189,10 +191,13 @@ public class Utiilties {
         String newDateStr = postFormater.format(Calendar.getInstance()
                 .getTime());
         return newDateStr;
+    }
 
+    public static String getDateStringInFormat(String format) {
+        SimpleDateFormat postFormater = new SimpleDateFormat(format);
 
-
-
+        String newDateStr = postFormater.format(Calendar.getInstance().getTime());
+        return newDateStr;
     }
 
     public static String getDateString(String Formats) {
@@ -295,9 +300,7 @@ public class Utiilties {
         {
             date=date.replace(a,"PM");
 
-
         }
-
 
         return date;
     }
@@ -496,5 +499,57 @@ public class Utiilties {
             view = new View(activity);
         }
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    public static String getDeviceIMEI(Context context) {
+        String imei;
+        MarshmallowPermission permission = new MarshmallowPermission(context, Manifest.permission.READ_PHONE_STATE);
+
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+        {
+            imei = Settings.Secure.getString(context.getContentResolver(),Settings.Secure.ANDROID_ID);
+        }
+        else
+        {
+            final TelephonyManager mTelephony = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            if (mTelephony.getDeviceId() != null)
+            {
+                imei = mTelephony.getDeviceId();
+            }
+            else
+            {
+                imei = Settings.Secure.getString(context.getContentResolver(),Settings.Secure.ANDROID_ID);
+            }
+        }
+
+        return imei;
+    }
+
+    public static void AlertForNoGps(final Context context) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Location Access");
+        builder.setMessage("Your device location is currenlty off, Please on to proceed")
+//		builder.setMessage("Your GPS seems to be disabled, do you want to enable it?")
+                .setCancelable(false)
+                .setPositiveButton("Turn on Location", new DialogInterface.OnClickListener() {
+                    public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        context.startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        dialog.cancel();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    public static String checkForAnyType(String value){
+        if (value.equals("anyType{}")){
+            return "";
+        }else{
+            return value;
+        }
     }
 }

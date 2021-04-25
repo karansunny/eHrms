@@ -27,7 +27,6 @@ public class SurfaceSchemeAdapter extends BaseAdapter {
     LayoutInflater mInflater;
     ArrayList<SurfaceSchemeEntity> ThrList=new ArrayList<>();
     UserDetails userInfo;
-    String panchayatCode,panchayatName="";
 
     public SurfaceSchemeAdapter(Activity listViewshowedit, ArrayList<SurfaceSchemeEntity> rlist, UserDetails userInfo) {
         this.activity=listViewshowedit;

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        app:cardCornerRadius="8dp"
+        android:id="@+id/rl_user_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:padding="4dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:textStyle="normal"
+                    android:textSize="15sp"
+                    android:textColor="@color/colorGreyDark"
+                    android:id="@+id/tv_count"/>
+
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/tv_count"
+                    android:layout_toLeftOf="@+id/ll_check"
+                    android:layout_margin="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Category"
+                    android:textStyle="normal"
+                    android:textSize="14sp"
+                    android:textColor="@color/themeBlue"
+                    android:id="@+id/tv_name"/>
+
+                <LinearLayout
+                    android:id="@+id/ll_check"
+                    android:layout_centerVertical="true"
+                    android:gravity="right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:visibility="gone"
+                        android:layout_marginRight="12dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rs.123"
+                        android:textStyle="bold"
+                        android:textSize="14sp"
+                        android:textColor="@color/holo_green_dark"
+                        android:id="@+id/tv_amount"/>
+
+                    <CheckBox
+                        android:visibility="visible"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/ch_status"/>
+
+                    <TextView
+                        android:visibility="gone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="विचारधिन"
+                        android:textStyle="bold"
+                        android:textSize="12sp"
+                        android:textColor="@color/holo_green_dark"
+                        android:id="@+id/tv_status"/>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_no_of_ben"
+                android:visibility="gone"
+                android:padding="8dp"
+                android:background="@drawable/shape_adapter_cell"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginBottom="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_weight="1"
+                    android:id="@+id/tv_ben_no"
+                    android:layout_marginLeft="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="लाभार्थी की संख्या"
+                    android:textStyle="normal"
+                    android:textSize="15sp"
+                    android:textColor="@color/colorGreyDark"/>
+
+                <TextView
+                    android:layout_weight="1"
+                    android:id="@+id/tv_total_amount"
+                    android:layout_marginLeft="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="राशि"
+                    android:textStyle="normal"
+                    android:textSize="15sp"
+                    android:textColor="@color/colorGreyDark"/>
+
+                <EditText
+                    android:visibility="gone"
+                    android:layout_marginLeft="24dp"
+                    android:id="@+id/edt_ben_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:background="@drawable/textboxshape"
+                    android:hint="लाभार्थियों की संख्या डालें"
+                    android:padding="6dp"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textColor="#222222"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
